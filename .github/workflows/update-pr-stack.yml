@@ -1,0 +1,18 @@
+name: Update PR Stack
+run-name: "${{ github.event.action }} PR #${{ github.event.pull_request.number }} - ${{ github.event.pull_request.title }}"
+
+on:
+  pull_request:
+    types: [closed, synchronize]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-pr-stack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Phlogistique/autorestack-action@2025d02504ed97693f4c452e1703b6efb087c868
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
